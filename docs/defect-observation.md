@@ -1,5 +1,5 @@
 # API Behaviour Observation
-
+# OBS
 ## OBS-001 — Non-existent Todo response
 
 **Endpoint:** `GET /todos/9999`
