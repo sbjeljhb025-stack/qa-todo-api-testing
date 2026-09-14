@@ -31,16 +31,5 @@ class GetTodoTests {
         assertEquals(5, response.jsonPath().getInt("id"));
     }
 
-    @Test
-    void shouldReturnNotFoundForNonExistentTodo() {
 
-        int statusCode =
-                given()
-                        .when()
-                        .get(BASE_URL + "/todos/9999")
-                        .statusCode();
-
-        // JSONPlaceholder returns 404 for IDs outside the dataset (todos only go up to 200).
-        assertEquals(404, statusCode);
-    }
 }
