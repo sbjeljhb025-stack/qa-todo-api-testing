@@ -1,5 +1,6 @@
 package tests;
 //CreateTodoTests
+//aim is keeping my tests not to complicated!!
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
@@ -44,6 +45,8 @@ class CreateTodoTests {
         Response response = given()
                 .header("Content-Type", "application/json")
                 .body(requestBody)
+
+
                 .when()
                 .post(BASE_URL + "/todos");
 
