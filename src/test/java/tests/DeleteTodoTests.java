@@ -1,5 +1,6 @@
 package tests;
-//DeleteTodoTests
+
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -10,11 +11,11 @@ class DeleteTodoTests {
 
     @Test
     void shouldDeleteTodo() {
-        int statusCode = given()
+        Response response = given()
                 .when()
-                .delete(BASE_URL + "/todos/1")
-                .statusCode();
+                .delete(BASE_URL + "/todos/1");
 
-        assertEquals(200, statusCode);
+        assertEquals(200, response.statusCode());
+        assertEquals("{}", response.asString().trim());
     }
 }

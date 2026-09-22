@@ -1,19 +1,17 @@
-# API Behaviour Observation
-# OBS
-## OBS-001 — Non-existent Todo response
+API Behaviour Observation
 
-**Endpoint:** `GET /todos/9999`
+OBS-001 — Non-existent Todo response
 
-**Scenario:** Request a Todo ID that does not exist in the sample API.
+Endpoint: GET /todos/9999
 
-**Expected for a typical REST API:** A non-existent resource is commonly represented by HTTP `404 Not Found`.
+Scenario: Request a Todo ID that does not exist in the sample API.
 
-**Observed JSONPlaceholder behaviour:** The API returns HTTP `404 Not Found` for this request. `/todos` only contains 200 records (IDs 1–200), so an out-of-range ID like `9999` correctly falls outside the dataset.
+Expected for a typical REST API: A non-existent resource is commonly represented by HTTP 404 Not Found.
 
-**Classification:** Not a defect. Matches standard REST semantics and JSONPlaceholder's documented behaviour for out-of-range IDs.
+Observed JSONPlaceholder behaviour: The test environment returns HTTP 200 with an empty JSON object for this request.
 
-**Correction history:** This observation previously stated that the API returned `200` with an empty object. That was inaccurate — automated test runs (`GetTodoNegativeTests`, `GetTodoTests`) consistently returned `404`, and this was confirmed against JSONPlaceholder's own documentation. The tests and this observation have been corrected to assert `404`.
+Classification: API behaviour observation, not automatically a defect in this learning project.
 
-**QA lesson:** A tester should verify actual behaviour empirically (via test execution and/or source documentation) rather than recording an assumption as an observation. An unverified "observed behaviour" note can itself become a defect in the test suite.
+QA lesson: A tester should compare actual behaviour with the documented requirement or API contract instead of assuming that every API follows the same implementation.
 
-**Action:** Closed. `GetTodoNegativeTests.shouldHandleNonExistentTodo` and `GetTodoTests.shouldReturnNotFoundForNonExistentTodo` (renamed from `shouldReturnEmptyObjectForNonExistentTodo`) now assert `404`.
+Action: Keep the behaviour documented and revisit the expected result if an explicit API requirement is provided.

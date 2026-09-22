@@ -21,3 +21,44 @@ jobs:
 
       - name: Run automated API tests
         run: mvn -B test
+
+      - name: Publish test summary
+        if: always()
+        shell: bash
+        run: |
+          echo "## Automated API Test Results" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Surefire report files:" >> "$GITHUB_STEP_SUMMARY"
+          echo "- target/surefire-reports" >> "$GITHUB_STEP_SUMMARY"
+
+          total=0
+          failures=0
+          errors=0
+          skipped=0
+
+          for file in target/surefire-reports/TEST-*.xml; do
+            [ -f "$file" ] || continue
+            total=$((total + $(sed -n 's/.*tests="\([0-9]*\)".*/\1/p' "$file" | head -1)))
+            failures=$((failures + $(sed -n 's/.*failures="\([0-9]*\)".*/\1/p' "$file" | head -1)))
+            errors=$((errors + $(sed -n 's/.*errors="\([0-9]*\)".*/\1/p' "$file" | head -1)))
+            skipped=$((skipped + $(sed -n 's/.*skipped="\([0-9]*\)".*/\1/p' "$file" | head -1)))
+          done
+
+          passed=$((total - failures - errors - skipped))
+
+          echo "| Metric | Count |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|---:|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Total | $total |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Passed | $passed |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Failed | $failures |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Errors | $errors |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Skipped | $skipped |" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Surefire reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-test-reports
+          path: target/surefire-reports/
+          if-no-files-found: warn
+

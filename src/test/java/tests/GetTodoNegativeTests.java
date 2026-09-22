@@ -1,5 +1,5 @@
 package tests;
-//GetTodoNegativeTests
+
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -19,7 +19,8 @@ public class GetTodoNegativeTests {
                         .get(BASE_URL + "/todos/9999")
                         .statusCode();
 
-        // JSONPlaceholder returns 404 for IDs outside the dataset (todos only go up to 200).
+        // JSONPlaceholder returns 404 Not Found for a non-existent Todo.
+        // This behaviour is documented in docs/defect-observation.md.
         assertEquals(404, statusCode);
     }
 }

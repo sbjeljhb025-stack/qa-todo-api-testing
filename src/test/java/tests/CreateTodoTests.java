@@ -1,6 +1,3 @@
-package tests;
-//CreateTodoTests
-//aim is keeping my tests not to complicated!!
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +24,7 @@ class CreateTodoTests {
                 .post(BASE_URL + "/todos");
 
         assertEquals(201, response.statusCode());
+        assertEquals(1, response.jsonPath().getInt("userId"));
         assertEquals("Learn API Testing", response.jsonPath().getString("title"));
         assertFalse(response.jsonPath().getBoolean("completed"));
         assertNotNull(response.jsonPath().get("id"));
@@ -45,13 +43,13 @@ class CreateTodoTests {
         Response response = given()
                 .header("Content-Type", "application/json")
                 .body(requestBody)
-
-
                 .when()
                 .post(BASE_URL + "/todos");
 
         assertEquals(201, response.statusCode());
+        assertEquals(2, response.jsonPath().getInt("userId"));
         assertEquals("Complete QA project", response.jsonPath().getString("title"));
         assertTrue(response.jsonPath().getBoolean("completed"));
+        assertNotNull(response.jsonPath().get("id"));
     }
 }

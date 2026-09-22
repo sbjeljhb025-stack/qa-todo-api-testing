@@ -1,222 +1,205 @@
-# QA Todo API Testing
 
-## Portfolio Project
 
-A beginner-friendly Quality Assurance portfolio project demonstrating API test design, manual test cases, automated API testing, defect thinking, documentation, and Git-based development.
 
-## Project Goal
+QA Todo API Testing
+Portfolio Project
+A junior Quality Assurance portfolio project demonstrating API test design, manual test cases, automated testing, negative testing, test reporting, traceability, defect documentation and continuous integration.
 
-The goal is to test the JSONPlaceholder Todo REST API and demonstrate a practical junior QA workflow without building an unnecessarily complicated application.
+Project Goal
+The goal is to test the JSONPlaceholder Todo REST API and demonstrate a practical QA workflow without needing to build a separate website or application.
 
-## What This Project Demonstrates
+System Under Test
+API: JSONPlaceholder Todo API
+Base URL: https://jsonplaceholder.typicode.com
 
-- Quality Assurance fundamentals
-- Test case design
-- Positive testing
-- Negative and edge-case testing
-- REST API testing
-- HTTP methods and status codes
-- JSON response validation
-- Automated testing
-- JUnit 5
-- REST Assured
-- Maven
-- Git and GitHub
-- Defect reporting
-- Requirements traceability
-- Continuous integration with GitHub Actions
+The project tests these CRUD operations:
 
-## System Under Test
+Method	Endpoint	Purpose
+GET	/todos/1	Retrieve a Todo
+GET	/todos/5	Retrieve another Todo
+GET	/todos/9999	Negative/edge-case behaviour
+POST	/todos	Create a Todo
+PUT	/todos/1	Update a Todo
+DELETE	/todos/1	Delete a Todo
+Test Coverage
+The automated suite contains 7 tests:
 
-**API:** JSONPlaceholder Todo API
+2 GET positive tests
 
-**Base URL:** `https://jsonplaceholder.typicode.com`
+1 GET negative/edge-case test
 
-## API Operations Tested
+2 POST tests
 
-| Method | Endpoint | Purpose |
-|---|---|---|
-| GET | `/todos/1` | Retrieve a Todo |
-| POST | `/todos` | Create a Todo |
-| PUT | `/todos/1` | Update a Todo |
-| DELETE | `/todos/1` | Delete a Todo |
+1 PUT test
 
-## Test Coverage
+1 DELETE test
 
-The project covers:
+The tests validate HTTP status codes and important JSON response fields.
 
-- Successful retrieval of a Todo
-- Retrieval of another valid Todo
-- Non-existent Todo behaviour
-- Creating a Todo
-- Updating a Todo
-- Deleting a Todo
-- Response field validation
-- HTTP status-code validation
+Tools and Technologies
+Java 21
 
-## QA Documentation
+JUnit 5
 
-- [`TESTING_STRATEGY.md`](TESTING_STRATEGY.md) — scope, approach, test types, entry/exit criteria and risks
-- [`test-cases/test-cases.md`](test-cases/test-cases.md) — manual test cases
-- [`docs/traceability-matrix.md`](docs/traceability-matrix.md) — requirement-to-test coverage
-- [`docs/defect-observation.md`](docs/defect-observation.md) — documented API behaviour/observation
-- [`docs/bug-report-template.md`](docs/bug-report-template.md) — reusable defect template
-- [`docs/test-execution-log.md`](docs/test-execution-log.md) — real test execution evidence
+REST Assured
 
-## Technologies
+Maven
 
-- Java 21
-- Maven
-- JUnit 5
-- REST Assured
-- Git
-- GitHub
-- GitHub Actions
+Git and GitHub
 
-## Project Structure
+GitHub Actions
 
-```text
+Project Structure
 qa-todo-api-testing/
 ├── .github/
 │   └── workflows/
 │       └── maven-tests.yml
 ├── docs/
+│   ├── bug-report-example.md
 │   ├── bug-report-template.md
 │   ├── defect-observation.md
 │   ├── test-execution-log.md
+│   ├── test-reporting.md
 │   └── traceability-matrix.md
-├── src/
-│   └── test/
-│       └── java/
-│           └── tests/
-│               ├── CreateTodoTests.java
-│               ├── DeleteTodoTests.java
-│               ├── GetTodoNegativeTests.java
-│               ├── GetTodoTests.java
-│               └── UpdateTodoTests.java
+├── src/test/java/tests/
+│   ├── CreateTodoTests.java
+│   ├── DeleteTodoTests.java
+│   ├── GetTodoNegativeTests.java
+│   ├── GetTodoTests.java
+│   └── UpdateTodoTests.java
 ├── test-cases/
 │   └── test-cases.md
-├── .gitignore
+├── DEMO_SCRIPT.md
+├── TESTING_STRATEGY.md
+├── SETUP.md
 ├── pom.xml
-├── README.md
-└── TESTING_STRATEGY.md
-```
+└── README.md
+How to Run the Tests
+Requirements
+Install:
 
-## How to Run Locally
+Java 21
 
-### 1. Requirements
+Maven
 
-Install Java 21 and Maven.
+An internet connection
 
-### 2. Run all tests
-
-```bash
+Run the automated suite
 mvn test
-```
+A successful run currently contains:
 
-### 3. View Maven test reports
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+Test Reports
+Maven Surefire creates machine-readable reports in:
 
-After a test run, reports are available under:
-
-```text
 target/surefire-reports/
-```
+See docs/test-reporting.md for how the reports are used as QA evidence.
 
-## QA Workflow
+QA Documentation
+TESTING_STRATEGY.md — scope, approach, test types, entry/exit criteria and risks
 
-```text
+test-cases/test-cases.md — manual test cases
+
+docs/traceability-matrix.md — requirement-to-test coverage
+
+docs/test-execution-log.md — real execution evidence
+
+docs/test-reporting.md — local and CI test reporting
+
+docs/defect-observation.md — observed API behaviour
+
+docs/bug-report-example.md — requirement-dependent bug report example
+
+docs/bug-report-template.md — reusable defect template
+
+QA Workflow
 Requirement
-    ↓
+↓
 Test Case Design
-    ↓
+↓
 Test Execution
-    ↓
+↓
 PASS / FAIL
-    ↓
-Investigate Failure
-    ↓
-Defect Report (if required)
-    ↓
+↓
+Investigate
+↓
+Defect / Observation
+↓
 Retest
-    ↓
-Regression Test
-```
+↓
+Regression Testing
+Negative Testing Note
+GET /todos/9999 is used to observe non-existent-resource behaviour. In this learning environment, JSONPlaceholder returns 200 OK with an empty object. This is documented as an observation rather than automatically being called a defect because a confirmed defect requires an agreed requirement or API contract.
 
-## Test Design Examples
+Continuous Integration
+GitHub Actions runs the Maven test suite on every push and pull request. The workflow:
 
-### Positive test
+Sets up Java 21.
 
-A valid request such as:
+Runs mvn -B test.
 
-```text
-GET /todos/1
-```
+Writes a test-count summary to the GitHub Actions job summary.
 
-is expected to return a successful response and valid Todo data.
+Uploads the Surefire reports as a workflow artifact, even when tests fail.
 
-### Negative/edge test
+Traceability
+The traceability matrix connects expected behaviour to manual test cases and automated tests. This provides evidence that the important API behaviours are covered.
 
-A request such as:
+Demonstration
+A complete 5–10 minute presentation script is available in DEMO_SCRIPT.md.
 
-```text
-GET /todos/9999
-```
+The demonstration should show:
 
-is used to observe how the API handles a Todo that does not exist.
+The API and test scope
 
-The actual API behaviour is documented rather than assuming that every API must behave the same way.
+Manual test cases
 
-## CI Testing
+Automated tests
 
-GitHub Actions runs `mvn test` automatically when code is pushed or a pull request is opened. This provides a simple regression check for the automated test suite.
+mvn test results
 
-## Git Development Practice
+Negative testing and investigation
 
-The project should be developed in small, meaningful increments. Example commit sequence:
+Traceability
 
-```text
-chore: initialise QA API testing project
-build: configure Maven and testing dependencies
-test: add successful GET todo test
-docs: add manual API test cases
-test: add create todo API tests
-test: add update todo API test
-test: add delete todo API test
-test: add negative API scenarios
-docs: add testing strategy and traceability
-ci: add automated Maven test workflow
-docs: improve project documentation
-```
+GitHub Actions
 
-Do not create fake historical commits. Make genuine changes over time and commit them as you work.
+Test reports
 
-## Learning Outcomes
+Learning Outcomes
+By completing this project, I can explain:
 
-By completing this project, I should be able to explain:
+What QA and software testing are
 
-- What QA is
-- What software testing is
-- What an API is
-- What REST means
-- GET, POST, PUT and DELETE
-- HTTP status codes
-- Positive vs negative testing
-- Test cases and test scenarios
-- Assertions
-- Automated testing
-- JUnit
-- REST Assured
-- Maven
-- Git and GitHub
-- Defect reporting
-- Regression testing
-- Continuous integration
+What a REST API is
+
+GET, POST, PUT and DELETE
+
+HTTP status codes
+
+Positive and negative testing
+
+Test cases and assertions
+
+JUnit 5 and REST Assured
+
+Maven and Git/GitHub
+
+Defect reporting
+
+Requirements traceability
+
+Regression testing
+
+Continuous integration
+
+Author
+Sbongakonke Jele
+Quality Assurance Portfolio Project — 2026
+
+
 
 
 ## Verification
 WTC-UNZ7LUUS
-## Author
-
-**Sbongakonke Jele**
-
-Quality Assurance Portfolio Project — 2026

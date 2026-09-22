@@ -1,19 +1,82 @@
-# Test Execution Log
+Test Execution Log
 
-Use this file to record real executions. Do not invent results.
+Record real test executions here. Do not invent results.
 
-| Date | Test | Result | Notes |
-|---|---|---|---|
-| YYYY-MM-DD | TC001 | PASS/FAIL | Add observation |
+Latest Execution Template
 
-## Summary
+Date
 
-- Total tests:
-- Passed:
-- Failed:
-- Blocked:
-- Environment:
+Command
 
-## Evidence
+Total
 
-Paste the Maven test summary or link to the CI run here after execution.
+Passed
+
+Failed
+
+Skipped
+
+Result
+
+Environment
+
+YYYY-MM-DD
+
+mvn test
+
+7
+
+7
+
+0
+
+0
+
+PASS
+
+Java 21 / Maven / Internet
+
+Automated Test Breakdown
+
+Test Class
+
+Tests
+
+Purpose
+
+CreateTodoTests
+
+2
+
+Create incomplete and completed Todos
+
+DeleteTodoTests
+
+1
+
+Delete a Todo
+
+GetTodoNegativeTests
+
+1
+
+Non-existent Todo behaviour
+
+GetTodoTests
+
+2
+
+Retrieve existing Todos
+
+UpdateTodoTests
+
+1
+
+Update a Todo
+
+Total
+
+7
+
+Full automated suite
+

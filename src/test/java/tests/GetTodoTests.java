@@ -2,7 +2,7 @@ package tests;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
-//GetTodoTests
+
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,5 +31,13 @@ class GetTodoTests {
         assertEquals(5, response.jsonPath().getInt("id"));
     }
 
+    @Test
+    void shouldReturnNotFoundForNonExistentTodo() {
+        Response response = given()
+                .when()
+                .get(BASE_URL + "/todos/9999");
 
+        // JSONPlaceholder returns 404 Not Found for a non-existent Todo.
+        assertEquals(404, response.statusCode());
+    }
 }

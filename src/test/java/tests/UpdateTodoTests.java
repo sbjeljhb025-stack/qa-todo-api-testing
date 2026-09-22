@@ -2,7 +2,7 @@ package tests;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
-//UpdateTodoTests
+
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,6 +28,7 @@ class UpdateTodoTests {
 
         assertEquals(200, response.statusCode());
         assertEquals(1, response.jsonPath().getInt("id"));
+        assertEquals(1, response.jsonPath().getInt("userId"));
         assertEquals("Updated QA Task", response.jsonPath().getString("title"));
         assertTrue(response.jsonPath().getBoolean("completed"));
     }
