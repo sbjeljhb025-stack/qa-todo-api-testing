@@ -1,27 +1,28 @@
 
 
 
-QA Todo API Testing
-Portfolio Project
+## QA Todo API Testing
+## Portfolio Project
 A junior Quality Assurance portfolio project demonstrating API test design, manual test cases, automated testing, negative testing, test reporting, traceability, defect documentation and continuous integration.
 
-Project Goal
+## Project Goal
 The goal is to test the JSONPlaceholder Todo REST API and demonstrate a practical QA workflow without needing to build a separate website or application.
 
 System Under Test
 API: JSONPlaceholder Todo API
 Base URL: https://jsonplaceholder.typicode.com
 
-The project tests these CRUD operations:
+## The project tests these CRUD operations:
 
-Method	Endpoint	Purpose
+## Method	Endpoint	Purpose
 GET	/todos/1	Retrieve a Todo
 GET	/todos/5	Retrieve another Todo
 GET	/todos/9999	Negative/edge-case behaviour
 POST	/todos	Create a Todo
 PUT	/todos/1	Update a Todo
 DELETE	/todos/1	Delete a Todo
-Test Coverage
+
+## Test Coverage
 The automated suite contains 7 tests:
 
 2 GET positive tests
@@ -36,7 +37,7 @@ The automated suite contains 7 tests:
 
 The tests validate HTTP status codes and important JSON response fields.
 
-Tools and Technologies
+## Tools and Technologies
 Java 21
 
 JUnit 5
@@ -49,7 +50,7 @@ Git and GitHub
 
 GitHub Actions
 
-Project Structure
+## Project Structure
 qa-todo-api-testing/
 ├── .github/
 │   └── workflows/
@@ -74,7 +75,7 @@ qa-todo-api-testing/
 ├── SETUP.md
 ├── pom.xml
 └── README.md
-How to Run the Tests
+## How to Run the Tests
 Requirements
 Install:
 
@@ -96,7 +97,7 @@ Maven Surefire creates machine-readable reports in:
 target/surefire-reports/
 See docs/test-reporting.md for how the reports are used as QA evidence.
 
-QA Documentation
+## QA Documentation
 TESTING_STRATEGY.md — scope, approach, test types, entry/exit criteria and risks
 
 test-cases/test-cases.md — manual test cases
@@ -132,7 +133,7 @@ Regression Testing
 Negative Testing Note
 GET /todos/9999 is used to observe non-existent-resource behaviour. In this learning environment, JSONPlaceholder returns 200 OK with an empty object. This is documented as an observation rather than automatically being called a defect because a confirmed defect requires an agreed requirement or API contract.
 
-Continuous Integration
+## Continuous Integration
 GitHub Actions runs the Maven test suite on every push and pull request. The workflow:
 
 Sets up Java 21.
@@ -143,10 +144,10 @@ Writes a test-count summary to the GitHub Actions job summary.
 
 Uploads the Surefire reports as a workflow artifact, even when tests fail.
 
-Traceability
+## Traceability
 The traceability matrix connects expected behaviour to manual test cases and automated tests. This provides evidence that the important API behaviours are covered.
 
-Demonstration
+## Demonstration
 A complete 5–10 minute presentation script is available in DEMO_SCRIPT.md.
 
 The demonstration should show:
@@ -167,7 +168,7 @@ GitHub Actions
 
 Test reports
 
-Learning Outcomes
+## Learning Outcomes
 By completing this project, I can explain:
 
 What QA and software testing are
@@ -204,4 +205,5 @@ Quality Assurance Portfolio Project — 2026
 ## Verification
 WTC-UNZ7LUUS
 ## Video link
+
   [https://www.youtube.com/watch?v=KQCYIk_UbMM]
