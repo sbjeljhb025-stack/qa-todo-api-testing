@@ -1,6 +1,6 @@
-Manual Test Cases
+## Manual Test Cases
 
-API Under Test
+## API Under Test
 
 JSONPlaceholder Todo API
 Base URL: https://jsonplaceholder.typicode.com
@@ -85,7 +85,7 @@ DELETE
 
 200
 
-Test Types
+## Test Types
 
 Positive testing: valid requests and expected responses.
 
