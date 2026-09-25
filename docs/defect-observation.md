@@ -1,6 +1,6 @@
-API Behaviour Observation
+## API Behaviour Observation
 
-OBS-001 — Non-existent Todo response
+## OBS-001 — Non-existent Todo response
 
 Endpoint: GET /todos/9999
 

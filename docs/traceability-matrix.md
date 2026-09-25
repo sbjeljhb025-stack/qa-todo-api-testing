@@ -1,4 +1,4 @@
-Requirements Traceability Matrix
+## Requirements Traceability Matrix
 
 The traceability matrix connects the expected API behaviour to the manual test case and the automated test that verifies it.
 
@@ -14,7 +14,7 @@ Status
 
 Retrieve an existing Todo
 
-TC001
+## TC001
 
 GetTodoTests.shouldGetTodoSuccessfully
 

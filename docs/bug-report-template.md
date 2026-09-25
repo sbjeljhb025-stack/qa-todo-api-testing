@@ -1,5 +1,5 @@
 
-Defect Report Template
+## Defect Report Template
 
 Defect ID
 
@@ -7,7 +7,7 @@ BUG-001
 
 Summary
 
-Short description of the problem.
+## Short description of the problem.
 
 Environment
 
@@ -29,7 +29,7 @@ Observe the response.
 
 Expected Result
 
-What should happen according to the requirement.
+## What should happen according to the requirement.
 
 Actual Result
 
